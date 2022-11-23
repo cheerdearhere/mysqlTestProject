@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- test를 위해 경로(pattern)에 대해 인증/권한 pass 설정 --> 
+	<http pattern="/" security="none"></http>
+	<http pattern="/**" security="none"></http>
+	
+
+	<!-- security 관련 설정 element 입력 -->
+	<!-- Authentication(인증) manager -->
+	<authentication-manager>
+		<authentication-provider user-service-ref="customUserDetailsService">
+			<password-encoder ref="passwordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+	<!-- custom Class (with User interface, UserDetailsService class) -->
+	<beans:bean id="customUserDetailsService" class="com.mysqlSpring.testProject.security.CustomUserDetailsService"/>
+	<!-- spring 제공 password encoder -->
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+</beans:beans>
