@@ -4,10 +4,56 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<!-- test를 위해 경로(pattern)에 대해 인증/권한 pass 설정 --> 
+	<!-- test를 위해 경로(pattern)에 대해 인증/권한 pass 설정 
 	<http pattern="/" security="none"></http>
-	<http pattern="/**" security="none"></http>
+	<http pattern="/**" security="none"></http>--> 
 	
+	<!-- authority -->
+	<http auto-config="true" use-expressions="true">
+
+			<access-denied-handler error-page="/main"/>
+
+			<headers>
+				<frame-options disabled="true"/>
+			</headers>
+
+			<!-- 처음 접근 페이지("/"요청 = home), permitAll: 모두 접근 -->
+			<intercept-url pattern="/" access="permitAll"/>
+			<intercept-url pattern="/home" access="permitAll"/>
+			<intercept-url pattern="/processLogin" access="permitAll"/>
+			<intercept-url pattern="/images/**" access="permitAll"/>
+			<!-- isAnonymous(): 로그인 안한 상태(비회원)만 접근 -->
+			<intercept-url pattern="/login" access="isAnonymous()"/>
+			<intercept-url pattern="/login_view" access="isAnonymous()"/>
+			<intercept-url pattern="/join" access="isAnonymous()"/>
+			<intercept-url pattern="/join_view" access="isAnonymous()"/>
+			<!-- hasRole(): ()안의 권한을 획득한 사람만 접근 -->
+			<intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https"/>
+			
+			<form-login 
+				login-processing-url="/login"
+				login-page="/loginView"
+				username-parameter="pid"
+				password-parameter="ppw"
+				default-target-url="/main"
+				authentication-failure-url="/processLogin?error=1"
+				always-use-default-target="true"
+			/>
+			<logout
+				invalidate-session="true"
+				logout-url="/logout"
+				logout-success-url="/processLogin?logout=1"
+				delete-cookies="JSESSIONID,remember-me"
+			/>
+			<remember-me
+				remember-me-parameter="remember-me"
+				remember-me-cookie="remember-me"
+				key="dreamikkey"
+				token-validity-seconds="3600"
+			/>
+			
+			<csrf disabled="false"/>
+	</http>
 
 	<!-- security 관련 설정 element 입력 -->
 	<!-- Authentication(인증) manager -->
