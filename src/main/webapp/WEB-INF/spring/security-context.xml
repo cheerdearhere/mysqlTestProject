@@ -21,7 +21,7 @@
 			<intercept-url pattern="/" access="permitAll"/>
 			<intercept-url pattern="/home" access="permitAll"/>
 			<intercept-url pattern="/processLogin" access="permitAll"/>
-			<intercept-url pattern="/images/**" access="permitAll"/>
+			<intercept-url pattern="/image/**" access="permitAll"/>
 			<!-- isAnonymous(): 로그인 안한 상태(비회원)만 접근 -->
 			<intercept-url pattern="/login" access="isAnonymous()"/>
 			<intercept-url pattern="/login_view" access="isAnonymous()"/>
