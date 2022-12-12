@@ -22,11 +22,13 @@
 			<intercept-url pattern="/home" access="permitAll"/>
 			<intercept-url pattern="/processLogin" access="permitAll"/>
 			<intercept-url pattern="/image/**" access="permitAll"/>
+			<intercept-url pattern="/style/**" access="permitAll"/>
+			<intercept-url pattern="/js/**" access="permitAll"/>
 			<!-- isAnonymous(): 로그인 안한 상태(비회원)만 접근 -->
 			<intercept-url pattern="/login" access="isAnonymous()"/>
-			<intercept-url pattern="/login_view" access="isAnonymous()"/>
+			<intercept-url pattern="/loginView" access="isAnonymous()"/>
 			<intercept-url pattern="/join" access="isAnonymous()"/>
-			<intercept-url pattern="/join_view" access="isAnonymous()"/>
+			<intercept-url pattern="/joinView" access="isAnonymous()"/>
 			<!-- hasRole(): ()안의 권한을 획득한 사람만 접근 -->
 			<intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https"/>
 			

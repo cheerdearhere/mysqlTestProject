@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.titleText{
+	font-family:fascinate;
+	font-weight:bold;
+	text-shadow:20px 20px white;
+}
+form.was_validated input:invalid{
+	border-color:red;
+}

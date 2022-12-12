@@ -28,6 +28,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- basic style sheet -->
+<link rel="stylesheet" href="style/basicStyle.css"/>
 <style>
 html, body{
 	height: 100%;
@@ -81,15 +83,17 @@ html, body{
 			</li>
 			<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
-					<a class="nav-link" href="loginView">Log in</a>
+					<a class="nav-link" href="loginView">log in</a>
 				</li>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
-					<a class="nav-link" href="joinForm" id="joinForm">Sign-Up</a>
-				</li>
+					<a class="nav-link" href="joinView" id="joinView">sign up</a>
+				</li>	
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
-					<a class="nav-link" href="logoutView">로그아웃</a>
+					<a class="nav-link" href="logoutView">logout</a>
 				</li>
 			</sec:authorize>
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE')">
@@ -110,7 +114,7 @@ html, body{
 
 <div id="mainRagion" class="container mt-3">
 	<div class="container">
-		<h1 class="display-1 text-center mb-5" style="font-family:fascinate;font-weight:bold;text-shadow:20px 20px white;">
+		<h1 class="display-1 text-center mb-5 titleText">
 			WELCOME TO<br/>MIO WORLD!!
 		</h1>
 	</div>
@@ -171,12 +175,14 @@ html, body{
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<h4 class="modal-tilte">
-					<i class="fa fa-info-circle" aria-hidden="true">Info</i>
+					<i class="fa fa-info-circle" aria-hidden="true" id="errorMessage">
+						Info
+					</i>
 				</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div id="mbody" class="modal-body">
-				<h4 class="text-center">가입이 확인되었습니다.</h4>
+				<h4 class="text-center">message</h4>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
@@ -186,24 +192,21 @@ html, body{
 </div>
 
 <script>
-$(document).ready(function(){
-	const mainRagion = document.querySelector("#mainRagion");
-	const errorMessage = document.querySelector("#mbody");
-	const infoModal = document.querySelector("#modal");
-	
-	$("#joinForm").click(function(event){
+$(document).ready(function(){	
+	$("#joinView").click(function(event){
 		event.preventDefault();
 		$.ajax({
-			url:$("#joinForm").attr("href"),
+			url:$("#joinView").attr("href"),
 			type:"get",
 			data:"",
 			success:function(data){
-				
-				mainRagion.html(data);
+				$("#mainRagion").html(data);
+				$("#skillTitle").text("Ajax, SPRING Framework");
+				$("#skillDetails").text("상세설명"); 
 			},
 			error:function(){
-				errorMessage.text("서버접속에 실패했습니다.");
-				infoModal.trigger("click");
+				$("#mbody").text("서버접속 실패");
+				$("#modal").trigger("click");
 			}
 		});
 	});
