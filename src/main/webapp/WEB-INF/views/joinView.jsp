@@ -38,6 +38,7 @@
 <h3 class="text-center text-danger titleText">
 	Would you join us?
 </h3>
+<h5 id="fail" class="text-center mt-3 mb-3"></h5>
 <form action="join" method="post" id="joinForm">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	<div class="form-group">
@@ -49,7 +50,7 @@
 		<input type="password" class="form-control" name="ppw" id="ppw" placeholder="대문자, 소문자, 특수문자 8자이상" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$" required/>
 	</div>
 	<div class="form-group">
-		<label for="ppw">비밀번호 확인</label>
+		<label for="ppwValid">비밀번호 확인</label>
 		<input type="password" class="form-control" id="ppwValid" placeholder="한번 더 입력해주세요." pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$" required/>
 	</div>
 	<div class="form-group">
@@ -93,12 +94,12 @@ $(document).ready(function(){
 					$("#modal").trigger("click");
 				}
 				else{
-					$("#mbody").text("가입 실패: 중복된 ID 입니다.");
-					$("#modal").trigger("click");
+					$("#fail").text("가입 실패: 중복된 ID 입니다.");
 				}
 			},
 			error: function(){					
-				$("#mbody").text("서버접속 실패");
+				$("#errorMessage").text("서버접속 실패");
+				$("#mbody").text("서버 오류");
 				$("#modal").trigger("click");
 			}
 		});

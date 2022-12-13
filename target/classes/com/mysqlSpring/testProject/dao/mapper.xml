@@ -5,4 +5,9 @@
 <mapper namespace="com.mysqlSpring.testProject.dao.IDao">
 <!-- dao interface - mapper -->
 
+<!-- user Join  -->
+<insert id="userJoin" parameterType="com.mysqlSpring.testProject.dto.UserJoinDto">
+	INSERT INTO testdb.UserDataTBL(PNUM,PID,PPW,PADDRESS,PPROFILE)
+VALUES(#{pNum},#{pId},#{pPw},#{pAddress},#{pProfile});
+</insert>
 </mapper>

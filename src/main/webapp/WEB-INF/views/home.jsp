@@ -173,7 +173,7 @@ html, body{
 <div class="modal fade" id="myModal">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-header bg-danger">
+			<div class="modal-header bg-info">
 				<h4 class="modal-tilte">
 					<i class="fa fa-info-circle" aria-hidden="true" id="errorMessage">
 						Info
@@ -181,8 +181,8 @@ html, body{
 				</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
-			<div id="mbody" class="modal-body">
-				<h4 class="text-center">message</h4>
+			<div class="modal-body">
+				<h4 id="mbody" class="text-center">message</h4>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
@@ -205,7 +205,8 @@ $(document).ready(function(){
 				$("#skillDetails").text("상세설명"); 
 			},
 			error:function(){
-				$("#mbody").text("서버접속 실패");
+				$("#errorMessage").text("서버접속 실패");
+				$("#mbody").text("서버 오류");
 				$("#modal").trigger("click");
 			}
 		});

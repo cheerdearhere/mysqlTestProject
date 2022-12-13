@@ -1,0 +1,12 @@
+>>UserData
+CREATE TABLE UserDataTBL
+(
+	pnum int NOT NULL PRIMARY KEY,
+    pid varchar(30) NOT NULL,
+    ppw varchar(100) NOT NULL,
+    paddress varchar(200) NOT NULL,
+    pprofile varchar(300),
+    pdate timestamp DEFAULT NOW(),
+    pauth varchar(20) DEFAULT 'ROLE_USER'
+);
+
