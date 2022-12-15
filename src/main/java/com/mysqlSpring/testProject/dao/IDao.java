@@ -4,4 +4,5 @@ import com.mysqlSpring.testProject.dto.UserJoinDto;
 
 public interface IDao {
 	public String userJoin(UserJoinDto dto);
+	public UserJoinDto login(String pid);
 }

@@ -8,4 +8,8 @@
 	<insert id="userJoin" parameterType="com.mysqlSpring.testProject.dto.UserJoinDto">
 		INSERT INTO UserDataTBL(PNUM,PID,PPW,PADDRESS,PPROFILE) VALUES (#{pNum},#{pId},#{pPw},#{pAddress},#{pProfile})
 	</insert>
+	<!-- user login -->
+	<select id="login" resultType="com.mysqlSpring.testProject.dto.UserJoinDto">
+		SELECT * FROM UserDataTBL WHERE PID=#{pid}
+	</select>
 </mapper>

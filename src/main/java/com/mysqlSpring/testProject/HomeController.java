@@ -35,5 +35,11 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping("/home")
+	public String rehome() {
+		System.out.println("home request");
+		return "home";
+	}
+
 	
 }

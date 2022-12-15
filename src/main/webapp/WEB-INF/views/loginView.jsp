@@ -15,7 +15,7 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
-<title>Home</title>
+<title>로그인</title>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--propper jquery -->
@@ -45,110 +45,33 @@ html, body{
 	<P id="skillDetails">  The time on the server is ${serverTime}. </P>
 </div>
 <nav class="navbar navbar-expand-md sticky-top" style="background-color:#fff;">
-	<button class="navbar-toggler btn btn-dark" type="button" data-toggle="collapse" data-target="#collapsiblebar">
-		<span class="navbar-toggler-icon text-dark" ></span>
-	</button>
-	<div class="collapse navbar-collapse" id="collapsiblebar">
 		<a class="navbar-brand nav-link" href="home" style="color:#FFFFFF;font-family:fascinate;font-weight:bold;font-size:3vw;text-shadow:0 -3px red, 3px 3px blue, -3px 3px green;">
 			<img class="rounded-circle" src="image/mio.png" alt="logo" style="width:35%;"/>
 			MIO WORLD
 		</a>
-		<ul class="navbar-nav nav">
-			<li class="nav-item">
-				<a class="nav-link" href="home">
-					<i class="fas fa-home"></i>Home
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="intro">
-					<i class="fas fa-cat"></i>Info
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="navigator">
-					<i class="fas fa-dog"></i>Relative
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#">
-					<i class="fas fa-hammer"></i>Cunstruction...
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="table">
-					<i class="fas fa-book"></i>Table
-				</a>
-			</li>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item">
-					<a class="nav-link" href="loginView">log in</a>
-				</li>
-			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item">
-					<a class="nav-link" href="joinView" id="joinView">sign up</a>
-				</li>	
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<li class="nav-item">
-					<a class="nav-link" href="logoutView">logout</a>
-				</li>
-			</sec:authorize>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE')">
-				<li class="nav-item">
-					<a class="nav-link" href="managerPage">관리자</a>
-				</li>
-			</sec:authorize>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" data-toggle="dropdown">more</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="userPage">my page</a><!-- 화면 전환 -->
-					<a class="dropdown-item" href="customerServices">고객센터</a><!-- toggle버튼 고려 -->
-				</div>
-			</li>
-		</ul>
-	</div>
 </nav>
-
 <div id="mainRagion" class="container mt-3">
-	<div class="container">
-		<h1 class="display-1 text-center mb-5 titleText">
-			WELCOME TO<br/>MIO WORLD!!
-		</h1>
-	</div>
-	<div id="homecat" class="carousel slide" data-ride="carousel">
-		<ul class="carousel-indicators">
-			<li data-slide-to="0" data-target="#homecat" class="active"></li>
-			<li data-slide-to="1" data-target="#homecat"></li>
-			<li data-slide-to="2" data-target="#homecat"></li>
-		</ul>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="image/deskCat.jpeg" alt="desk_cat" width="1100" height="500"/>
-				<div class="carousel-caption">
-					<h1 class="display-1" style="font-family:fascinate;text-shadow:5px 5px 5px black;font-size:5.9vw;">Desk Cat</h1>
-				</div>	 
-			</div>
-			<div class="carousel-item">
-				<img src="image/healthCat.jpeg" alt="health_cat" width="1100" height="500"/>
-				<div class="carousel-caption">
-					<h1 class="display-1" style="font-family:fascinate;text-shadow:5px 5px 5px black;font-size:5.9vw;">Healthy Cat</h1>
-				</div> 
-			</div>
-			<div class="carousel-item">
-				<img src="image/babyCat.jpeg" alt="baby_cat" width="1100" height="500"/>
-				<div class="carousel-caption">
-					<h1 class="display-1" style="font-family:fascinate;text-shadow:5px 5px 5px black;font-size:5.9vw;">Baby Cat</h1>
-				</div>
-			</div>
+	<h1 class="display-1 text-center mb-5 titleText">
+		Log in!!
+	</h1>
+	<div id="loginfo" class="text-success"></div>
+	<form id="logFrm" name="logFrm" method="post" action="login">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<div class="form-group">
+			<input type="email" class="form-control" name="pId" placeholder="e-mail을 입력하세요." required/>
 		</div>
-		<a class="carousel-control-prev" href="#homecat" data-slide="prev">
-			<span class="carousel-control-prev-icon"></span>
-		</a>
-		<a class="carousel-control-next" href="#homecat" data-slide="next">
-			<span class="carousel-control-next-icon"></span>
-		</a>
-	</div>
+		<div class="form-group">
+			<input type="password" class="form-control" name="pPw" placeholder="비밀번호를 입력하세요." required/>
+			<p class="logInfo">소문자, 대문자, 특수문자를 포함합니다.</p>
+		</div>
+		<div class="form-group form-check">
+			<input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" checked/>
+			<label for="rememberMe" class="form-check-label" aria-describedby="rememberMeHelp">remember me!</label>
+		</div>
+		<button type="submit" class="btn btn-outline-dark">로그인</button> &emsp; 
+		<a href="joinView" id="joinView" class="btn btn-danger">계정이 없어요</a>&emsp; 
+		<a href="home" class="btn btn-outline-secondary">홈으로 갈래요</a>
+	</form>
 </div>
 
 <footer class="container mt-5 p-0">
@@ -157,9 +80,9 @@ html, body{
 				<form action="#" method="post">
 			<div class="form-group">
 				<label for="email">&emsp;주문 문의</label>
-				<input type="email" class="form-control" id="email" placeholder="Enter email"/>
+				<input type="email" class="form-control" id="email" placeholder="로그인 후에 이용해주세요" readonly/>
 			</div>
-			<button type="submit" class="btn btn-danger">Sign Up</button>
+			<button type="submit" class="btn btn-secondary" disabled>Sign Up</button>
 		</form>
 	</div>
 </footer>
@@ -200,7 +123,7 @@ $(document).ready(function(){
 			success:function(data){
 				$("#mainRagion").html(data);
 				$("#skillTitle").text("Ajax, SPRING Framework");
-				$("#skillDetails").text("상세설명"); 
+				$("#skillDetails").text("login의 #mainRegion에 joinView를 호출합니다."); 
 			},
 			error:function(){
 				$("#errorMessage").text("서버접속 실패");
@@ -209,6 +132,20 @@ $(document).ready(function(){
 			}
 		});
 	});
+	<c:choose>
+		<c:when test="${not empty log}">
+			$("#loginfo").text("welcome");
+		</c:when>
+		<c:when test="${not empty logout}">
+			$("#loginfo").text("log out 성공");
+		</c:when>
+		<c:when test="${not empty error}">
+			$("#loginfo").text("welcome");
+		</c:when>
+		<c:otherwise>
+			$("#loginfo").text("otherwise");
+		</c:otherwise>
+	</c:choose>
 });
 </script>
 </body>

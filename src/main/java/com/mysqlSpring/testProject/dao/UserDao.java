@@ -27,4 +27,11 @@ public class UserDao implements IDao {
 		}
 		return result;
 	}
+	
+	@Override
+	public UserJoinDto login(String pid) {
+		System.out.println("login request: "+pid);
+		UserJoinDto result = sqlSession.selectOne("login", pid);
+		return result;
+	}
 }

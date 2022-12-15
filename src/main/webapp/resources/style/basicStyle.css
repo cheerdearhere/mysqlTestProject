@@ -7,3 +7,7 @@
 form.was_validated input:invalid{
 	border-color:red;
 }
+.logInfo{
+	font-size: 10px;
+	color: red;
+}

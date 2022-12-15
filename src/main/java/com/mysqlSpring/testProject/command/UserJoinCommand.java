@@ -1,11 +1,10 @@
-package com.mysqlSpring.testProject.controller;
+package com.mysqlSpring.testProject.command;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 
-import com.mysqlSpring.testProject.command.UserCommand;
 import com.mysqlSpring.testProject.dao.UserDao;
 import com.mysqlSpring.testProject.dto.UserJoinDto;
 import com.mysqlSpring.testProject.util.Constant;

@@ -48,6 +48,7 @@
 	<div class="form-group">
 		<label for="ppw">비밀번호</label>
 		<input type="password" class="form-control" name="ppw" id="ppw" placeholder="대문자, 소문자, 특수문자 8자이상" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{8,50}$" required/>
+		<p class="logInfo">소문자, 대문자, 특수문자를 포함합니다.</p>
 	</div>
 	<div class="form-group">
 		<label for="ppwValid">비밀번호 확인</label>
@@ -63,7 +64,8 @@
 	</div>
 	<button type="submit" class="btn btn-outline-success">회원가입</button> &emsp;
 	<button type="reset" class="btn btn-outline-danger">취 소</button> &emsp;
-	<a href="logView" class="btn btn-outline-primary">로그인</a>
+	<a href="logView" class="btn btn-outline-primary">계정이 있어요</a>&emsp;
+	<a href="home" class="btn btn-outline-secondary">home으로</a>
 </form>
 	
 <script>
@@ -90,8 +92,12 @@ $(document).ready(function(){
 			data: $("#joinForm").serialize(),
 			success: function(data){
 				if(data.search("join-success")> -1){
-					$("#mbody").text("가입을 축하합니다.");
+					$("#errorMessage").text("가입성공");
+					$("#mbody").text("5초 후 로그인 화면으로 이동합니다.");
 					$("#modal").trigger("click");
+					setTimeout(function(){
+						window.location.href="loginView";
+					},5000);
 				}
 				else{
 					$("#fail").text("가입 실패: 중복된 ID 입니다.");
