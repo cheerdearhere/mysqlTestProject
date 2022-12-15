@@ -21,15 +21,14 @@ public class UserJoinCommand implements UserCommand {
 		String pw = request.getParameter("ppw");
 		String address = request.getParameter("paddress");
 		String profile = request.getParameter("pprofile");
-		
 		String pw_org = pw;
 		pw = passwordEncoder.encode(pw_org);
 		UserJoinDto dto = new UserJoinDto(num,id,pw,address,profile,null,null);
+		System.out.println(id+"/"+num+"/"+pw+address+"/"+profile);
 		
 		UserDao udao = Constant.udao;
 		String result = udao.userJoin(dto);
 		request.setAttribute("result", result);
-		
 	}
 
 }
