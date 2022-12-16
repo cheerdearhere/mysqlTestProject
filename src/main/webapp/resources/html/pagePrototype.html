@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+<meta charset="UTF-8">
+<!-- RWD -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MS -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/>
+<title>Front page no.1</title>
+<!--bootstrap 4-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!--jquery--> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--propper jquery-->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<!--latestjavascript-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- daum map free API(https://postcode.map.daum.net/guide) -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<!-- 
+font: osawld, nanumGothic,fascinate 
+media files(고양이 3장,sc 12장)
+-->
+<!--fontawesome icon v5.70-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<!-- font awesom icons v -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.js">
+<style>
+/*card style*/
+.card-link {
+	font-size:30px;
+}
+/*carousel style*/
+.carousel-caption p {
+	font-family: NanumGothic;
+}
+.carousel-inner img{
+	width: 100%;
+	height:100%;
+}
+/*navbar style*/
+.nav-link {
+	font-family: Oswald;
+	font-size: 1vmax;
+}
+.nav-pills > .nav-item > .active, #dropdownMenu[aria-expanded=true]{
+	color: #FFFFFF !important;
+	background-color: #000000 !important; 
+	border: 1px double yellow !important;
+}
+/*table style*/
+.table thead tr th, .table tbody tr td{
+	text-align:center;
+}
+.table tbody tr td:first-child + td{
+	text-align: left;
+}
+/*sign up modal*/
+#postcodeBtn{
+	color:white;
+}
+#postcodeBtn:hover, #spotIcon:hover{
+	color:#6c757d;
+}
+</style>
+</head>
+<body style="padding-top:100px;">
+ 
+<!-- menu bar -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background:#000000;">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsiblebar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="collapsiblebar">
+		<a class="navbar-brand nav-link" href="#home" data-toggle="pill" style="color:#FFFFFF;font-family:fascinate;font-weight:bold;font-size:3vw;text-shadow:0 -3px red, 3px 3px blue, -3px 3px green;">
+			<img class="rounded-circle" src="media/mio.png" alt="logo" style="width:35%;"/>
+			MIO WORLD
+		</a>
+		<ul class="navbar-nav nav nav-pills" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link" href="#home" data-toggle="pill">
+					<i class="fas fa-home"></i>
+					Home
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#intro" data-toggle="pill">
+					<i class="fas fa-cat"></i>
+					Info
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#navigator" data-toggle="pill">
+					<i class="fas fa-dog"></i>
+					Relative
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#none">
+					<i class="fas fa-hammer"></i>
+					Cunstruction...
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#table" data-toggle="pill">
+					<i class="fas fa-book"></i>
+					Table
+				</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" data-toggle="dropdown">more</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" data-toggle="modal" data-target="#signModal" type="button">Sign-Up</a>
+					<a class="dropdown-item" data-toggle="modal" data-target="#loginModal" type="button">Log-In</a>
+					<a class="dropdown-item" href="#">my page</a><!-- 화면 전환 -->
+					<a class="dropdown-item" href="#">고객센터</a><!-- toggle버튼 고려 -->
+				</div>
+			</li>
+		</ul>
+		<a class="text-secondary ml-auto" type="button">
+			<i class="fas fa-key"></i>
+			log-out
+		</a>
+		<form class="form-inline mx-3">
+			<input type="text" style="font-size:1vw;" placeholder="Search..."/>
+			<button class="btn btn-outline-success mx-2" style="font-size:1vw;" type="button">검색</button>
+		</form>
+	</div> 
+</nav>
+
+<!-- sign up Modal -->
+<div class="modal fade" id="signModal">
+	<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>회원가입</h3>
+				<button type="button" class="close btn btn-outline-light" data-dismiss="modal"><small>&times;</small></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<form class="needs-validation" action="#" method="post" name="signin">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-light">이름</span>
+							</div>
+							<input type="text" name="username" class="form-control" placeholder="본인 확인버튼을 눌러주세요." required/>
+							<div class="input-group-append">
+								<button type="button" name="btn1" class="btn btn-outline-success">본인확인</button> 
+							</div>
+						</div>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-light"><i class="fas fa-id-card"></i> &nbsp;ID</span>
+							</div>
+							<input type="text" name="userID" class="form-control" placeholder="중복확인 버튼을 눌러주세요." required/>
+							<div class="input-group-append"> 
+								<button type="button" class="btn btn-outline-primary">ID 중복 확인</button> 
+							</div>
+						</div>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-warning">비밀번호</span>
+							</div>
+							<input class="form-control" type="password" name="pw" placeholder="비밀번호를 입력해주세요." required/>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<i class="fas fa-mail-bulk"></i>
+								</span>
+							</div>
+							<input type="email" class="form-control" name="userEmail" placeholder="abc@ex.com"/>
+						</div>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Please fill out this field.</div>
+						<div class="input-group mb-1">
+							<div class="input-group-prepend">
+								<span class="input-group-text"> 
+									<i class="fas fa-map"></i>
+								</span>
+							</div>
+							<input type="text" class="form-control bg-white" id="userAddress" name="userAddress" placeholder="검색하여 주소 입력" readonly/>
+							<input type="text" class="form-control d-none" id="userPostcode" name="userPostcode" placeholder="우편번호"/>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" id="postcodeBtn" onclick="daumPostcode()" value="우편번호 찾기" type="button">
+								<!-- Daum 우편번호 open API function: daumPostcode() -->
+									<span id="spotIcon" class="spinner-grow spinner-grow-sm">
+										<i id="postQ" class="fas fa-search text-secondary"></i>
+									</span>
+								</button>
+							</div>
+						</div>
+						<input type="text" class="form-control mb-3" id="addressDetail" name="addressDetail" placeholder="상세 주소"/>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text text-light bg-info">
+									<i class="fas fa-phone"></i>
+								</span>
+							</div>
+							<input type="tel" class="form-control" name="userTel" placeholder="유선 또는 무선 전화 번호"/>
+						</div>
+						<button type="submit" class="btn btn-success btn-block">Sign Up</button>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-danger" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 우편번호 API 연결 script -->
+<script>
+function daumPostcode() {
+//작동할 함수(eventlistener와 연결)
+    new daum.Postcode({//daum제공 code
+        oncomplete: function(data) {// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+        	// 각 주소의 노출 규칙에 따라 주소를 조합한다.(도로명/지번 등)
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("addressDetail").value = extraAddr;
+            
+            } else {
+                document.getElementById("addressDetail").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('userPostcode').value = data.zonecode;
+            document.getElementById("userAddress").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("addressDetail").focus();
+        }
+    }).open();
+}
+</script>
+
+<!-- log-in Modal --> 
+<div class="modal fade" id="loginModal">
+	<div class="modal-dialog modal-xs modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header" style="background-color:#000000;">
+				<img class="d-inline-block w-75 mx-auto" style="border:0px;border-radius:10%;" src="media/ob.gif" alt="logo"/>
+			</div>
+			<div class="modal-body">
+				<form class="needs-validation">
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<span class="input-group-text bg-primary text-white"><i class="fas fa-user"></i></span>
+						</div>
+						<input class="form-control" type="text" name="inputid"/>
+					</div>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+					<div class="input-group"> 
+						<div class="input-group-prepend">
+							<span class="input-group-text bg-primary text-white"><i class="fas fa-key"></i></span>
+						</div>
+						<input class="form-control" type="password" name="inputpw"/>
+					</div>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="remem" name="remem"/>
+						<label class="custom-control-label" for="#remem">Remember me</label>
+					</div>
+					<br/>
+					<button type="submit" class="btn btn-outline-primary btn-block">Log-in</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div class="btn-group">
+					<a href="#" class="btn btn-outline-primary" type="button">아이디/비밀번호 찾기</a>
+					<a data-toggle="modal" data-target="#signModal" class="btn btn-outline-success" type="button" data-dismiss="modal" href="#">
+						회원가입
+					</a>
+				</div>
+				<button type="button" class="btn btn-danger ml-auto" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- validation script code -->
+<script>
+	(function() {
+		'use strict';
+		window.addEventListener('load', function() {
+			var forms = document.getElementsByClassName('needs-validation');
+			// Loop over them and prevent submission
+			var validation = Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+	})();
+</script>
+
+<!-- tab content: home, intro, navigator, table -->
+<div class="tab-content">
+	<div class="jumbotron tab-pane active pb-5" id="home">
+		<div class="container pb-2">
+			<div class="container">
+				<h1 class="display-1 text-center mb-5" style="font-family:fascinate;font-weight:bold;text-shadow:20px 20px white;">
+					WELCOME TO<br/>MIO WORLD!!
+				</h1>
+			</div>
+			<div id="homecat" class="carousel slide" data-ride="carousel">
+				<ul class="carousel-indicators">
+					<li data-slide-to="0" data-target="#homecat" class="active"></li>
+					<li data-slide-to="1" data-target="#homecat"></li>
+					<li data-slide-to="2" data-target="#homecat"></li>
+				</ul>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="media/deskCat.jpeg" alt="desk_cat" width="1100" height="500"/>
+						<div class="carousel-caption">
+							<h1 class="display-1" style="font-family:fascinate;text-shadow:5px 5px 5px black;font-size:5.9vw;">Desk Cat</h1>
+						</div>	 
+					</div>
+					<div class="carousel-item">
+						<img src="media/healthCat.jpeg" alt="health_cat" width="1100" height="500"/>
+						<div class="carousel-caption">
+							<h1 class="display-1" style="font-family:fascinate;text-shadow:5px 5px 5px black;font-size:5.9vw;">Healthy Cat</h1>
+						</div> 
+					</div>
+					<div class="carousel-item">
+						<img src="media/babyCat.jpeg" alt="baby_cat" width="1100" height="500"/>
+						<div class="carousel-caption">
+							<h1 class="display-1" style="font-family:fascinate;text-shadow:5px 5px 5px black;font-size:5.9vw;">Baby Cat</h1>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#homecat" data-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</a>
+				<a class="carousel-control-next" href="#homecat" data-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="container tab-pane fade mb-5" id="intro">
+		<h2 class="text-center">Introduce</h2>
+		<div class="card shadow-lg mx-auto" style="width:70%">
+			<img src="media/mio.png" alt="logo" class="card-img-left"/>
+			<div class="card-body">
+				<h1 class="card-title">Welcome to the Mio World!!</h1>
+				<p class="card-text">환영인사</p>
+				<a href="#email" class="btn btn-outline-danger">Send E-mail</a>
+				<a href="#github" class="btn btn-outline-secondary">Visit GitHub</a>
+				<a href="#blog" class="btn btn-outline-success">Visit Blog</a> 
+			</div>
+		</div>
+		<br/><br/>
+		<h3 class="text-center">Starcraft II Cooperative Mission Reviews</h3>
+		<div id="st2" class="carousel slide" data-ride="carousel" style="height:600px;">
+			<ul class="carousel-indicators">
+				<li data-target="#st2" data-slide-to="0" class="active"></li>
+				<li data-target="#st2" data-slide-to="1"></li>
+				<li data-target="#st2" data-slide-to="2"></li>
+				<li data-target="#st2" data-slide-to="3"></li>
+				<li data-target="#st2" data-slide-to="4"></li>
+				<li data-target="#st2" data-slide-to="5"></li>
+				<li data-target="#st2" data-slide-to="6"></li>
+				<li data-target="#st2" data-slide-to="7"></li>
+				<li data-target="#st2" data-slide-to="8"></li>
+				<li data-target="#st2" data-slide-to="9"></li>
+				<li data-target="#st2" data-slide-to="10"></li>
+				<li data-target="#st2" data-slide-to="11"></li>
+			</ul>	
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="media/mio.png" alt="mio" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<p>Cat</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/alarak.png" alt="jucsoon" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Alarak</h1>
+						<p> 3위신 master 완료. 탈다림의 공허폭격기가 생각보다 데미지가 약하고 몸도 약해서 잘 안쓰게됨. 보라준은 공허수정탑안에 들어가면 체력회복이 되는데 탈다림은 그런게 없고 공듀..아니 군주님이 체력이 빠지면 공허폭격기 체력을소모해서 더 약한 종이비행기를 만듬. 어려움 이하 난이도에서는 그나마 쓸만하지만 아주어려움 이상은 쓰기힘듬. 두마리씩 나오는 75미네랄짜리 질럿과 공중 포격하는 거신의 조합이 생각보다 유용해 차라리 다른 위신에 지상병력을 사용하는게 편함. 다만 비싸서 초반엔 군주님 혼자 열심히 달려야하는 단점이 있음. 상대가 저글링이나 바이오닉 다수를 보내는 적이라면 군주님이 약자멸시를 잘보여줘서 정말 좋음. 가끔 죽순...아니 군주님이 기억날때 하는 정도. </p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/spearOfAdun.jpeg" alt="spear" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Spear Of Adun</h1>
+						<p>그 대단하다는 고대 프로토스의 대함선이지만 생각보다 기능이 없음. 크기만 할뿐 별로임 아둔의 이름이 아까움. 생선 가시마냥 중간 중간이 비어서 그런가? 처음 나왔을땐 감탄했지만 10년정도 지나니 그저그런정도. 태양석말고 태양을 자원으로 쓰지 그랬니.</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/karax.png" alt="gongdolmon" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Karax</h1>
+						<p>3위신 master 완료. 3위신까지 찍었지만 결국 쓰는건 2위신. 포탑이 강하고 소환속도가 빨라 전천후 사용하기 좋음. 이동을 많이해야하는 맵이나 한 챕터가 끝나면 다 터지는 맵에서는 속이 터짐. 시간가속의 맛으로 하는 캐릭터</p> 
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/arcturusMengsk.png" alt="nabbenjasic" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Arcturus Mengsk</h1>
+						<p>할까 말까 고민중인 사령관. 재밌어보이기는 하는데 초반에 너무 약해서 3위신까지 못갈것같음. 음... 고민을 더해봐야할듯. 폭격하는 재미는 있어보임.
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/mirahan.png" alt="korean" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Mira Han</h1>
+						<p>할까 말까 고민중인 사령관. 남편(호너)도 있지만 주로 용병을 많이 사용하는 듯. 초반부터 끝까지 유용한듯보임. 만약 새로 산다면 1순위로 구입할 예정</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/jamesEugeneRaynor.jpeg" alt="jimjosim" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">James Eugene Raynor</h1>
+						<p>3위신 완료. 공중 유닛에서 제일 유용한듯. 메딕이 기계를 치료하는게 좋음. 희대의 사기유닛 배틀크루저를 빠르게 갈수있는 3위신이지만 미네랄 600원짜리라 쉽게뽑지 못함. 서플라이 대신 커맨드를 지어서 나중엔 scv를 다 적진으로 은퇴시키고 지게로봇으로 미네랄을 수급해야함. 순간이동을 잘못쓰면 정작 필요할때 느린 이속때문에 망할 수 있어 아끼는 것도 좋음. 기계유닛에 스팀팩같은 스킬도 있어 급속 딜 넣기 좋음. 기계공 컨셉인 스완에겐 이 스킬이 없는게 이상..이래서 사령관 놈들이란. ㅉㅉ 초반만 잘넘기면 사기. 초중반 포함 운영을 생각하면 바이오닉 체력과 방어력이 2.5배이상 늘어나는 2위신이 더 쓸만함. 파이어뱃 체력이 배력급... </p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/zeratul.png" alt="entarozeratul" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Zeratul</h1>
+						<p>영원한 프로토스의 영웅. 앰흑기사. 다만 협동전에서는 그닥 취향에 안맞아서 안하는 중. 유물 원정대는 뭔가 귀찮.</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/artanis.png" alt="scout" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Artanis</h1>
+						<p>스카웃놈. 작가의 혼란으로 신분상승한 캐릭터. 카락스는 안쓰는 무기 다주고 자기가 좋은건 다가져간 사령관. 의외로 1위신은 찍음. 공명장을 계속 움직일수있어 대처하기 좋은 사령관. 균형도 잘잡혀있고 마스터레벨 올리면 유닛을 소환할때 받는 버프가 유용함. 캐릭터 빼곤 다좋은 사령관. </p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/rorySwann.png" alt="rory" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Rory Swann</h1>
+						<p>테란의 기계공. 골리앗과 배슬, 시즈탱크로 균형이 참 잘맞는 사령관. 가스지원과 레이저 천공기까지 나름대로 운영하기 좋은 캐릭터. 다만 초반에 자원을 어느정도 모으기전까지는 위험할수있어 라크쉬르나 아몬의 낫 맵에서는 좀 위험할 수 있음. 수비건물의 역량도 좋지만 미네랄을 많이써서 유닛과 병행하기는 어려움. 건물만 짓기애는 생각보다 약해서 시즈는 필수.</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/vorazun.png" alt="Raszagal" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Vorazun</h1>
+						<p>라자갈의 딸. 이름대로(?) 보라색이 인상적인 캐릭터. 암흑 기사의 수장으로 다크템플러의 스킬이 인상적임. 다크템플러와 질럿 조합의 지상조합과 질럿, 공허폭격기의 공중 조합 모두 좋음. 투명하게 만들어주는 수정탑은 마스터레벨을 올릴수록 범위가 커져 그 자체만으로 수비역량을 높여줄 뿐더러 카락스를 제외하고는 수리가 불가한 다른 프로토스 사령관들과 달리 투명 수정탑 범위내에서는 체력과 실드가 회복되는 놀라운 사령관. 내구성이 약하긴하지만 충분히 쓸만하다. </p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="media/zagara.png" alt="queen" width="1100" height="500"/>
+					<div class="carousel-caption">
+						<h1 style="font-family:anton">Zagara</h1>
+						<p>인구수가 고작 50뿐이지만 스컬지와 맹독충으로 시원한 플레이가 가능한 사령관. 다만 스플래시 공격을 하는 적을 만나면 살살녹아 갑작스런 공백에 당황하기도함. 공중목표(수송선 파괴/공허수정 파괴)를 대상일때는 버티다가 스컬지로만 깰수있어 쉬움. 위신에서 인구수를 늘릴 수 있지만 자가라가 없으면 광폭화가 없어져 아쉬움이 많음.</p>
+					</div>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#st2" data-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			</a>
+			<a class="carousel-control-next" href="#st2" data-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</a>
+		</div>
+	</div>
+	<div class="container tab-pane fade" id="navigator">
+		<h2>관련 사이트</h2>
+		<div class="card-columns mb-5">
+			<div class="card bg-primary" style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>PRIMARY</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-primary">card link</a>
+				</div>
+			</div>
+			<div class="card bg-danger"  style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>DANGER</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-danger">card link</a>
+				</div>
+			</div>
+			<div class="card bg-success"  style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>SUCCESS</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-success">card link</a>
+				</div>
+			</div>
+			<div class="card bg-warning"  style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>WARNING</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-warning">card link</a>
+				</div>
+			</div>
+			<div class="card bg-info"  style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>INFO</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-info">card link</a>
+				</div>
+			</div>
+			<div class="card bg-dark"  style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>DARK</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-dark">card link</a>
+				</div>
+			</div>
+			<div class="card bg-light"  style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>LIGHT</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-light">card link</a>
+				</div>
+			</div>
+			<div class="card bg-secondary"  style="box-shadow:3px 3px 5px black">
+				<div class="card-body text-center">
+					<h3>SECONDARY</h3>
+					<p class="card-text">some text inside card</p>
+					<a href="#" class="card-link stretched-link text-secondary">card link</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container tab-pane fade table-responsive" id="table">
+		<h2 class="text-primary" style="font-family:fascinate;"><i class="fas fa-coffee"></i> Please Leave a Mark!! </h2>
+		<table class="table table-bordered table-hover">
+			<thead class="thead-light">
+				<tr>
+					<th>No.</th>
+					<th>글 제목</th>
+					<th>작성자</th>
+					<th>조회수</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="table-primary">
+					<td><i class="fas fa-cat"></i></td>
+					<td>
+						<a class="text-white" href="/alert001">글쓰기 공지: 처음 글을 쓰실때는 반드시 읽어주세요!!</a>
+					</td>
+					<td>관리자</td>
+					<td>999</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>
+						<a class="text-body" href="/border001">
+							이 글의 제목을 잘 모르겠어서 일단 길게 써 봤습니다.
+						</a>
+					</td>
+					<td>autor_1</td>
+					<td>300</td>
+					<td>2022-05-01</td>
+				</tr>
+			</tbody> 
+		</table>
+		<br/> 
+		<div class="container text-right">
+			<div class="btn-group">
+				<button type="button" id="writeButton" class="btn btn-outline-primary">
+					<span class="spinner-grow spinner-grow-sm"></span>
+					글쓰기
+				</button>
+				<button type="button" id="replace" class="btn btn-outline-primary">
+					새로고침
+				</button>
+				<button type="button" id="list" class="btn btn-outline-primary">
+					목 록
+				</button>
+			</div>
+		</div>
+		<hr/>
+		<div class="container">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled">
+					<a href="#prepage" class="page-link">이전 페이지</a>
+				</li>
+				<li class="page-item active">
+					<a href="#tablePage1" class="page-link">1</a>
+				</li>
+				<li class="page-item">
+					<a href="#tablePage2" class="page-link">2</a>
+				</li>
+				<li class="page-item">
+					<a href="#tablePage3" class="page-link">3</a>
+				</li>
+				<li class="page-item">
+					<a href="#tablePage4" class="page-link">4</a>
+				</li>
+				<li class="page-item">
+					<a href="#nextPage" class="page-link">다음 페이지</a>
+				</li>
+				<li class="page-item">
+					<a href="#morePages" class="page-link">...</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- footer info --> 
+<footer class="container-fluid mt-4 mb-3" style="width:100%;height:5%;">
+	<h5 style="font-size:1vw;">mio-craft.cop</h5>
+	<a style="font-size:0.7vw;" class="text-secondary" href="postEmail">문의: dream-ik89@naver.com</a>
+	<hr/>
+</footer>
+</body> 
+</html>

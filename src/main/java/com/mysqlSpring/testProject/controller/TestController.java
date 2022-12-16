@@ -116,4 +116,10 @@ public class TestController {
 		System.out.println("log-out request ");
 		return "logoutView";
 	}
+	
+	@RequestMapping("/intro")
+	public String introView(HttpServletRequest request,Model model) {
+		System.out.println("intro request");
+		return "intro";
+	}
 }

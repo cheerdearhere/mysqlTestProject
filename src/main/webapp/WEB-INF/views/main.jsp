@@ -63,7 +63,7 @@ html, body{
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="intro">
+				<a class="nav-link" href="intro" id="intro">
 					<i class="fas fa-cat"></i>Info
 				</a>
 			</li>
@@ -184,16 +184,16 @@ html, body{
 <script src="js/clock.js"></script>
 <script>
 $(document).ready(function(){	
-	$("#joinView").click(function(event){
+	$("#intro").click(function(event){
 		event.preventDefault();
 		$.ajax({
-			url:$("#joinView").attr("href"),
+			url:$("#intro").attr("href"),
 			type:"get",
 			data:"",
 			success:function(data){
 				$("#mainRagion").html(data);
-				$("#skillTitle").text("Ajax, SPRING Framework");
-				$("#skillDetails").text("상세설명"); 
+				$("#skillTitle").text("Introduction Character");
+				$("#skillDetails").text("캐릭터에대한 설명을 저장하고 볼 수 있는 페이지 입니다."); 
 			},
 			error:function(){
 				$("#errorMessage").text("서버접속 실패");

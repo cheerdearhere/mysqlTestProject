@@ -42,8 +42,10 @@ html, body{
 
 <div class="container text-center mt-1 mb-0">
 	<h1 id="skillTitle">Hello world!</h1>
-	<P id="skillDetails">  The time on the server is ${serverTime}. </P>
+	<P id="skillDetails"></P>
+	<p id="clock"></p>
 </div>
+<script src="js/clock.js"></script>
 <nav class="navbar navbar-expand-md sticky-top" style="background-color:#fff;">
 		<a class="navbar-brand nav-link" href="home" style="color:#FFFFFF;font-family:fascinate;font-weight:bold;font-size:3vw;text-shadow:0 -3px red, 3px 3px blue, -3px 3px green;">
 			<img class="rounded-circle" src="image/mio.png" alt="logo" style="width:35%;"/>
@@ -137,6 +139,8 @@ $(document).ready(function(){
 			$("#loginfo").text("welcome");
 		</c:when>
 		<c:when test="${not empty logout}">
+			$("#skillTitle").text("log out 완료");
+			$("#skillDetails").text("spring security를 통해 로그아웃했습니다. HttpSession의 rememberMe 쿠키를 만료시켜 사용자 정보를 삭제했습니다.");
 			$("#loginfo").text("log out 성공");
 		</c:when>
 		<c:when test="${not empty error}">
