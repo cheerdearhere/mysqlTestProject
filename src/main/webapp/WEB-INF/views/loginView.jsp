@@ -143,7 +143,7 @@ $(document).ready(function(){
 			$("#loginfo").text("welcome");
 		</c:when>
 		<c:otherwise>
-			$("#loginfo").text("otherwise");
+			$("#loginfo").text("information");
 		</c:otherwise>
 	</c:choose>
 });

@@ -110,4 +110,10 @@ public class TestController {
 		mav.setViewName("loginView");
 		return mav;
 	}
+	
+	@RequestMapping("/logoutView")
+	public String logoutView(HttpServletRequest request, Model model) {
+		System.out.println("log-out request ");
+		return "logoutView";
+	}
 }

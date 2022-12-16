@@ -18,6 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		 UserDao udao = Constant.udao;
+		 System.out.println("CustomUserDetailsService login("+username+")");
 		 UserJoinDto dto = udao.login(username);
 		 System.out.println("dto: " + dto);
 		 if(dto==null) {

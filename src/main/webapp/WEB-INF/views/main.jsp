@@ -6,7 +6,6 @@
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,7 +14,7 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
-<title>Home</title>
+<title>Main page</title>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!--propper jquery -->
@@ -40,9 +39,12 @@ html, body{
 </head>
 <body>
 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="user_id"/>
+</sec:authorize>
 <div class="container text-center mt-1 mb-0">
-	<h1 id="skillTitle">Hello world!</h1>
-	<P id="skillDetails">  </P>
+	<h1 id="skillTitle">SPRING security를 통해 Log in 완료</h1>
+	<P id="skillDetails">${user_id} 님 안녕하세요. </P>
 	<p id="clock"></p>
 </div>
 <nav class="navbar navbar-expand-md sticky-top" style="background-color:#fff;">
@@ -80,16 +82,6 @@ html, body{
 					<i class="fas fa-book"></i>Table
 				</a>
 			</li>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item">
-					<a class="nav-link" href="loginView">log in</a>
-				</li>
-			</sec:authorize>
-			<sec:authorize access="isAnonymous()">
-				<li class="nav-item">
-					<a class="nav-link" href="joinView" id="joinView">sign up</a>
-				</li>	
-			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
 					<a class="nav-link" href="logoutView">logout</a>
@@ -115,7 +107,7 @@ html, body{
 	<div class="container">
 		<h1 class="display-1 text-center mb-5 titleText">
 			WELCOME TO<br/>MIO WORLD!!
-		</h1>
+		</h1>	
 	</div>
 	<div id="homecat" class="carousel slide" data-ride="carousel">
 		<ul class="carousel-indicators">

@@ -35,8 +35,8 @@
 			<form-login 
 				login-processing-url="/login"
 				login-page="/loginView"
-				username-parameter="pid"
-				password-parameter="ppw"
+				username-parameter="pId"
+				password-parameter="pPw"
 				default-target-url="/main"
 				authentication-failure-url="/processLogin?error=1"
 				always-use-default-target="true"
