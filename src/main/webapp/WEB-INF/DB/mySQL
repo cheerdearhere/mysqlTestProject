@@ -24,3 +24,7 @@ CREATE TABLE INTRODB(
     introContent VARCHAR(3000),
     introPhoto VARCHAR(300)
 );
+조회수를 위한 column추가
+ALTER TABLE `testdb`.`INTRODB` 
+ADD COLUMN `introHit` INT NOT NULL DEFAULT 0 AFTER `introPhoto`;
+
