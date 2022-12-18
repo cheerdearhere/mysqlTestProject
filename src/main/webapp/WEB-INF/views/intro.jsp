@@ -46,9 +46,10 @@
 	</div>
 </div>
 <div class="contatiner">
+
+	<h3 class="text-center text-info" style="margin-top: 90px;">List</h3>
 	<a id="introWriteView" class="btn btn-success" href="introWriteView">등록</a>
-	<h3 class="text-center text-info">List</h3>
-	<hr/>
+	<hr/>	
 	<div class="row mb-3">
 		<c:forEach items="${allList}" var="dto">
 			<div class="col-md-4">
@@ -64,5 +65,47 @@
 		</c:forEach>
 	</div>
 </div>
+<script>
+$(document).ready(function(){
+	$("#introWriteView").click(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:"introWriteView",
+			type:"get",
+			data:"",
+			success:function(data){
+				$("#mainRagion").html(data);
+				$("#skillTitle").text("Introduction Character Write page");
+				$("#skillDetails").text("캐릭터에대한 설명을 저장하기위한 페이지 입니다."); 
+			},
+			error:function(){
+				$("#errorMessage").text("서버접속 실패");
+				$("#mbody").text("서버 오류");
+				$("#modal").trigger("click");
+			}
+		});
+	});
+	$(".pClick").click(function(e){
+		e.preventDefault();
+		let target=$(e.target);
+		let url=target.attr("href");
+		$.ajax({
+			url:url,
+			type:"get",
+			data:"",
+			success:function(data){
+				$("#mainRagion").html(data);
+				$("#skillTitle").text("Character Details page");
+				$("#skillDetails").text("캐릭터에대한 상세 설명 페이지 입니다."); 
+			},
+			error:function(){
+				$("#errorMessage").text("서버접속 실패");
+				$("#mbody").text("서버 오류");
+				$("#modal").trigger("click");
+			}
+		});
+	});
+});
+</script>
 </body>
 </html>

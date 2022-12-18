@@ -18,14 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mysqlSpring.testProject.command.UserCommand;
+import com.mysqlSpring.testProject.command.ICommand;
 import com.mysqlSpring.testProject.command.UserJoinCommand;
+import com.mysqlSpring.testProject.dao.BoardDao;
 import com.mysqlSpring.testProject.dao.UserDao;
 import com.mysqlSpring.testProject.util.Constant;
 
 @Controller
 public class TestController {
-	private UserCommand com;
+	private ICommand com;
 	
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
@@ -38,6 +39,12 @@ public class TestController {
 	public void setUdao(UserDao udao) {
 		this.udao=udao;
 		Constant.udao=udao;
+	}
+	private BoardDao bdao; 
+	@Autowired
+	public void setBdao(BoardDao bdao) {
+		this.bdao=bdao;
+		Constant.bdao=bdao;
 	}
 	
 	@RequestMapping("/joinView")
@@ -120,6 +127,10 @@ public class TestController {
 	@RequestMapping("/intro")
 	public String introView(HttpServletRequest request,Model model) {
 		System.out.println("intro request");
+		
+		//dto list call
+		com = new IntroListCommand();
+		com.execute(request, model);
 		return "intro";
 	}
 }

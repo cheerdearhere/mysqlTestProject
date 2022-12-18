@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mysqlSpring.testProject.dto.UserJoinDto;
 
-public class UserDao implements IDao {
+public class UserDao implements IUserDao {
 	@Autowired
 	private SqlSession sqlSession;
 	

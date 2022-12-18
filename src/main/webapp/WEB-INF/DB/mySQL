@@ -10,3 +10,17 @@ CREATE TABLE UserDataTBL
     pauth varchar(20) DEFAULT 'ROLE_USER'
 );
 
+>>Introduce Character
+	: sequence query
+SELECT nextval('Intro') FROM DUAL;
+CALL create_sequence('Intro');
+
+	: DB
+CREATE TABLE INTRODB(
+	introId BIGINT NOT NULL PRIMARY KEY,
+    introClass VARCHAR(30) NOT NULL,
+    introName VARCHAR(100) NOT NULL,
+    introTitle VARCHAR(100),
+    introContent VARCHAR(3000),
+    introPhoto VARCHAR(300)
+);

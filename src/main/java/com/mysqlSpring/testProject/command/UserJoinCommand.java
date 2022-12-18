@@ -9,7 +9,7 @@ import com.mysqlSpring.testProject.dao.UserDao;
 import com.mysqlSpring.testProject.dto.UserJoinDto;
 import com.mysqlSpring.testProject.util.Constant;
 
-public class UserJoinCommand implements UserCommand {
+public class UserJoinCommand implements ICommand {
 
 	@Override
 	public void execute(HttpServletRequest request, Model model) {
