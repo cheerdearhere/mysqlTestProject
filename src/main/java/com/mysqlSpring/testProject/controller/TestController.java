@@ -16,12 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mysqlSpring.testProject.command.ICommand;
 import com.mysqlSpring.testProject.command.UserJoinCommand;
 import com.mysqlSpring.testProject.dao.BoardDao;
 import com.mysqlSpring.testProject.dao.UserDao;
+import com.mysqlSpring.testProject.dto.IntroDto;
 import com.mysqlSpring.testProject.util.Constant;
 
 @Controller
@@ -123,7 +125,7 @@ public class TestController {
 		System.out.println("log-out request ");
 		return "logoutView";
 	}
-	
+//intro
 	@RequestMapping("/intro")
 	public String introView(HttpServletRequest request,Model model) {
 		System.out.println("intro request");
@@ -133,4 +135,19 @@ public class TestController {
 		com.execute(request, model);
 		return "intro";
 	}
+
+	@RequestMapping("/introWriteView")
+	public String introWriteView(HttpServletRequest request, Model model) {
+		System.out.println("intro write view request");
+		return "introWriteView";
+	}
+	
+	@RequestMapping("/introWrite")
+	public String introWrite(MultipartHttpServletRequest mphRequest, Model model) {
+		System.out.println("introWrite request");
+		
+		return "intro";
+	}
+	
+	
 }

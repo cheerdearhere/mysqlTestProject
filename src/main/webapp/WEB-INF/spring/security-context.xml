@@ -30,7 +30,8 @@
 			<intercept-url pattern="/join" access="isAnonymous()"/>
 			<intercept-url pattern="/joinView" access="isAnonymous()"/>
 			<!-- hasRole(): ()안의 권한을 획득한 사람만 접근 -->
-			<intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https"/>
+			<!-- hasAnyRole(): ()안의 권한 중 하나라도 있으면 접근  -->
+			<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')" requires-channel="https"/>
 			
 			<form-login 
 				login-processing-url="/login"

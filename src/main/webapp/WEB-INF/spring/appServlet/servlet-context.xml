@@ -59,6 +59,14 @@
 		<beans:property name="transactionManager" ref="transactionManager"/>
 	</beans:bean>
 	
+	<!-- multipart File uploader -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes --> 
+		<beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
+		<!-- max size of file in memory (in bytes)  disk저장전 memory저장 용량 -->  	
+		<beans:property name="maxInMemorySize" value="1048576" /><!-- 1MB --> 
+	</beans:bean> 
+	
 	<!-- password 암호화 bean -->
 	<beans:bean name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<!-- Customized DAO class Bean -->
