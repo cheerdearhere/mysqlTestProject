@@ -1,6 +1,8 @@
 package com.mysqlSpring.testProject.controller;
 
+import java.io.File;
 import java.util.Collection;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -145,8 +148,50 @@ public class TestController {
 	@RequestMapping("/introWrite")
 	public String introWrite(MultipartHttpServletRequest mphRequest, Model model) {
 		System.out.println("introWrite request");
+		String introClass = mphRequest.getParameter("introClass");
+		String introName = mphRequest.getParameter("introName");
+		String introTitle = mphRequest.getParameter("introTitle");
+		String introPhoto = null;
+		String introContent = mphRequest.getParameter("introContent");
+		System.out.println(introClass+"/"+introName+"/"+introTitle+"/"+introContent);
 		
-		return "intro";
+		MultipartFile mf = mphRequest.getFile("introPhoto");
+		
+		String originalFileName = mf.getOriginalFilename();
+		long preName=System.currentTimeMillis();
+		long fileSize=mf.getSize();
+		System.out.println(originalFileName+": "+fileSize);
+		
+		//file path, tomcat용 path
+		String path = "/Users/choikmacbookair/Desktop/workspace/testProject/src/main/webapp/resources/upimage/";
+		String tomcatPath = "/Users/tomcat/apache-tomcat-9.0.63/wtpwebapps/testProject/resources/upimage/";
+		//file path
+		String safeFile = path+preName+originalFileName;
+		String safeFile2= tomcatPath+preName+originalFileName;
+		introPhoto = preName+originalFileName;
+		IntroDto dto = new IntroDto(0,introClass,introName,introTitle,introContent,introPhoto,0);
+		
+		mphRequest.setAttribute("introDto", dto);
+		
+		com=new IntroWriteCommand();
+		com.execute(mphRequest,model);
+		
+		Map<String, Object> map = model.asMap();
+		String res = (String)map.get("result");
+		System.out.println("res: " + res);
+		if(res.equals("success")) {
+			try {
+				mf.transferTo(new File(safeFile));
+				mf.transferTo(new File(safeFile2));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			return "redirect:intro";
+		}
+		else {
+			return "redirect:intro";
+		}
 	}
 	
 	

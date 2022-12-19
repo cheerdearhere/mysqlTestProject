@@ -5,5 +5,9 @@
 <!-- dao interface - mapper --> 
 <mapper namespace="com.mysqlSpring.testProject.dao.IBoardDao">
 <!-- Board SQL -->
-	
+<insert id="introWrite" parameterType="com.mysqlSpring.testProject.dto.IntroDto">
+	INSERT INTO INTRODB (INTROID,INTROCLASS,INTRONAME,INTROTITLE,INTROCONTENT,INTROPHOTO,INTROHIT)
+	VALUES(
+		(SELECT NEXTVAL('Intro') FROM DUAL),#{introClass},#{introName},#{introTitle},#{introContent},#{introPhoto},0);
+</insert>	
 </mapper>

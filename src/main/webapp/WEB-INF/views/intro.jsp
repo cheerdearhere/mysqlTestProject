@@ -83,7 +83,7 @@ $(document).ready(function(){
 				$("#mbody").text("서버 오류");
 				$("#modal").trigger("click");
 			}
-		});
+		}); 
 	});
 	$(".pClick").click(function(e){
 		e.preventDefault();
