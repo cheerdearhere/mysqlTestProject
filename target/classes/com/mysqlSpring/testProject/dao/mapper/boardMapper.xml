@@ -9,5 +9,11 @@
 	INSERT INTO INTRODB (INTROID,INTROCLASS,INTRONAME,INTROTITLE,INTROCONTENT,INTROPHOTO,INTROHIT)
 	VALUES(
 		(SELECT NEXTVAL('Intro') FROM DUAL),#{introClass},#{introName},#{introTitle},#{introContent},#{introPhoto},0);
-</insert>	
+</insert>
+<select id="introList" resultType="com.mysqlSpring.testProject.dto.IntroDto">
+	SELECT * FROM INTRODB
+</select>	
+<select id="introDetails" resultType="com.mysqlSpring.testProject.dto.IntroDto">
+	SELECT * FROM INTRODB WHERE INTRO=#{introId}
+</select>
 </mapper>

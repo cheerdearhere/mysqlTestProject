@@ -1,5 +1,7 @@
 package com.mysqlSpring.testProject.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,5 +24,21 @@ public class BoardDao implements IBoardDao {
 		}
 		return result;
 	}
+
+	@Override
+	public ArrayList<IntroDto> introList() {
+		System.out.println("introList method");
+		ArrayList<IntroDto> dtos = new ArrayList<IntroDto>();
+		dtos=(ArrayList)sqlSession.selectList("introList");
+		return dtos;
+	}
+
+	@Override
+	public IntroDto introDetails(int introID) {
+		System.out.println("introDetails method");
+		IntroDto dto = sqlSession.selectOne("introDetails", introID);
+		return dto;
+	}
+
 
 }

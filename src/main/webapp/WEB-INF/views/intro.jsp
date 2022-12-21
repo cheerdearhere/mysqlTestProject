@@ -53,12 +53,12 @@
 	<div class="row mb-3">
 		<c:forEach items="${allList}" var="dto">
 			<div class="col-md-4">
-				<div class="card" style="width:30%">
-					<img class="card-img-top" src="upimage/${dto.introPhoto}" alt="${dto.introPhoto}" style="max-width:280px;height:280px;"/>
+				<div class="card">
+					<img class="card-img-top" src="upimage/${dto.introPhoto}" alt="${dto.introPhoto}" style="max-width:280px;width:100%;height:280px;"/>
 					<div class="card-body">
 						<h5 class="card-title">종류: ${dto.introClass} </h5>
 						<h5 class="card-text">이름: ${dto.introName}</h5>
-						<a href="introDetails?introId=${dto.introId}" class="pClick stratched-link text-dark">자세히 보기</a>
+						<a href="introDetails?introId=${dto.introId}" class="pClick stretched-link text-dark" style="text-decoration:none">자세히 보기</a>
 					</div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@ $(document).ready(function(){
 			success:function(data){
 				$("#mainRagion").html(data);
 				$("#skillTitle").text("Character Details page");
-				$("#skillDetails").text("캐릭터에대한 상세 설명 페이지 입니다."); 
+				$("#skillDetails").text("캐릭터에대한 상세 설명 페이지 입니다. url: "+url); 
 			},
 			error:function(){
 				$("#errorMessage").text("서버접속 실패");

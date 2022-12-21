@@ -23,6 +23,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mysqlSpring.testProject.command.ICommand;
+import com.mysqlSpring.testProject.command.IntroDetailsCommand;
+import com.mysqlSpring.testProject.command.IntroListCommand;
+import com.mysqlSpring.testProject.command.IntroWriteCommand;
 import com.mysqlSpring.testProject.command.UserJoinCommand;
 import com.mysqlSpring.testProject.dao.BoardDao;
 import com.mysqlSpring.testProject.dao.UserDao;
@@ -136,6 +139,7 @@ public class TestController {
 		//dto list call
 		com = new IntroListCommand();
 		com.execute(request, model);
+
 		return "intro";
 	}
 
@@ -193,6 +197,19 @@ public class TestController {
 			return "redirect:intro";
 		}
 	}
-	
+	@RequestMapping("/introDetails")
+	public String introDetails(HttpServletRequest request, Model model) {
+		System.out.println("introDetails request");
+		com=new IntroDetailsCommand();
+		com.execute(request, model);
+		
+		if(model.containsAttribute("introDetails")) {
+			System.out.println("introDetails dto select Success");
+			return "introDetails";
+		}
+		else {
+			return "detailsError";
+		}
+	}
 	
 }
