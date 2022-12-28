@@ -46,7 +46,6 @@
 	</div>
 </div>
 <div class="contatiner">
-
 	<h3 class="text-center text-info" style="margin-top: 90px;">List</h3>
 	<a id="introWriteView" class="btn btn-success" href="introWriteView">등록</a>
 	<hr/>	
