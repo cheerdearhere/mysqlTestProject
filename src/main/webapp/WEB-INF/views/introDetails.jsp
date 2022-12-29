@@ -29,10 +29,49 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 <!--google icon -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+<link rel="stylesheet" href="style/introDetails.css"/>
 </head>
 <body>
 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="user_id"/>
+</sec:authorize>
+<div class="container">
+	<img id="introPhoto" src="upimage/${introDetails.introPhoto}" alt="${introDetails.introPhoto}"/>
+</div>
+<div class="container">
+	<table class="table table-bordered">
+		<tbody>
+			<tr>
+				<td class="introTab">번호</td>
+				<td>${introDetails.introId}</td>
+				<td class="introTab">종류</td>
+				<td>${introDetails.introClass}</td>
+			</tr>
+			<tr>
+				<td class="introTab">이름</td>
+				<td>${introDetails.introName}</td>
+				<td class="introTab">조회수</td>
+				<td>${introDetails.introHit}</td>
+			</tr>
+			<tr>
+				<td class="introTab" colspan="2">제목</td>
+				<td colspan="2">${introDetails.introTitle}</td>
+			</tr>
+			<tr>
+				<td class="introTab" colspan="4">내용</td>
+			</tr>
+			<tr>
+				<td colspan="4">${introDetails.introContent}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="btn-group w-100">
+		<a class="btn btn-outline-success" id="introModi" href="introModi?introId=${introDetails.introId}">변경하기</a>
+		<a class="btn btn-outline-danger" id="introDelete" href="introDelete?introId=${introDetails.introId}">삭제하기</a>
+	</div>
+
+</div>
 
 </body>
 </html>

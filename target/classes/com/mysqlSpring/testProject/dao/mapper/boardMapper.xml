@@ -14,6 +14,6 @@
 	SELECT * FROM INTRODB
 </select>	
 <select id="introDetails" resultType="com.mysqlSpring.testProject.dto.IntroDto">
-	SELECT * FROM INTRODB WHERE INTRO=#{introId}
+	SELECT * FROM INTRODB WHERE INTROID=#{introId}
 </select>
 </mapper>
