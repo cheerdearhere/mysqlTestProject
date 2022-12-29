@@ -69,7 +69,7 @@
 	<div class="btn-group w-100">
 		<a class="btn btn-outline-success" id="introModi" href="introModi?introId=${introDetails.introId}">변경하기</a>
 		<a class="btn btn-outline-danger" id="introDelete" href="introDelete?introId=${introDetails.introId}">삭제하기</a>
-	</div>
+	</div> 
 
 </div>
 
