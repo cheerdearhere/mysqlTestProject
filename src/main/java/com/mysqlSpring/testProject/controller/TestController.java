@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mysqlSpring.testProject.command.ICommand;
+import com.mysqlSpring.testProject.command.IntroDeleteCommand;
 import com.mysqlSpring.testProject.command.IntroDetailsCommand;
 import com.mysqlSpring.testProject.command.IntroListCommand;
 import com.mysqlSpring.testProject.command.IntroWriteCommand;
@@ -210,6 +211,20 @@ public class TestController {
 		else {
 			return "detailsError";
 		}
+	}
+	@RequestMapping("/introModifyForm")
+	public String introModify(HttpServletRequest request, Model model) {
+		System.out.println("introModifyForm request");
+		com=new IntroDetailsCommand();//IntroModyfyFormCommand()
+		com.execute(request, model);
+		return "introModifyView";
+	}
+	@RequestMapping("/introDelete")
+	public String introDelete(HttpServletRequest request, Model model) {
+		System.out.println("introDelete request");
+		com=new IntroDeleteCommand(); 
+		com.execute(request, model);
+		return "intro";
 	}
 	
 }

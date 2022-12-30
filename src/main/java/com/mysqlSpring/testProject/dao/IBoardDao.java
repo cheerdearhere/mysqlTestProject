@@ -8,4 +8,5 @@ public interface IBoardDao {
 	public String introWrite(IntroDto dto);
 	public ArrayList<IntroDto> introList();
 	public IntroDto introDetails (int introID);
+	public void introDelete(int introId);
 }

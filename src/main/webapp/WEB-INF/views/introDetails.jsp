@@ -67,11 +67,65 @@
 		</tbody>
 	</table>
 	<div class="btn-group w-100">
-		<a class="btn btn-outline-success" id="introModi" href="introModi?introId=${introDetails.introId}">변경하기</a>
+		<a class="btn btn-outline-success" id="introModifyForm" href="introModifyForm?introId=${introDetails.introId}">변경하기</a>
 		<a class="btn btn-outline-danger" id="introDelete" href="introDelete?introId=${introDetails.introId}">삭제하기</a>
 	</div> 
-
 </div>
-
+<script>
+const username = <c:out value="${user_id}"/>;
+$(document).ready(function(){
+	function authCheck(){
+		if(username==="admin@naver.com"||username==="manager@daum.net"){
+			return true;
+		}
+		else{
+			$("#errorMessage").text("권한이 없습니다");
+			$("#mbody").text("admin 또는 manager 계정만 삭제할 수 있습니다.");
+			$("#modal").trigger("click");
+			return false;
+		}
+	}
+	$("#introModifyForm").click(function(e){
+		e.preventDefault();
+		if(authCheck()){
+			$.ajax({
+				url:$("#introModifyForm").attr("href"),
+				type:"get",
+				data:"",
+				success:function(data){
+					$("#mainRagion").html(data);
+					$("#skillTitle").text("Introduction Details Modify form");
+					$("#skillDetails").text("상세 설명 수정을 위한 form page를 호출합니다."); 
+				},
+				error:function(){
+					$("#errorMessage").text("서버접속 실패");
+					$("#mbody").text("서버 오류");
+					$("#modal").trigger("click");
+				}
+			});
+		}
+	});
+	$("#introDelete").click(function(e){
+		e.preventDefault();
+		if(authCheck()){
+			$.ajax({
+				url:$("#introDelete").attr("href"),
+				type:"get",
+				data:"",
+				success:function(data){
+					$("#mainRagion").html(data);
+					$("#skillTitle").text("Introduction Details Delete");
+					$("#skillDetails").text("게시물을 삭제합니다."); 
+				},
+				error:function(){
+					$("#errorMessage").text("서버접속 실패");
+					$("#mbody").text("서버 오류");
+					$("#modal").trigger("click");
+				}
+			});
+		}
+	});
+});
+</script>
 </body>
 </html>
