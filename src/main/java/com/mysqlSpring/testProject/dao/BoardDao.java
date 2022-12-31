@@ -34,13 +34,17 @@ public class BoardDao implements IBoardDao {
 	}
 
 	@Override
-	public IntroDto introDetails(int introID) {
+	public IntroDto introDetails(int introId) {
 		System.out.println("introDetails method");
-		IntroDto dto = sqlSession.selectOne("introDetails", introID);
-		//upHit();
+		IntroDto dto = sqlSession.selectOne("introDetails", introId);
+		introUpHit(introId);
 		return dto;
 	}
-
+	private void introUpHit(int introId) {
+		System.out.println("introDetails up hit");
+		int res = sqlSession.update("introUpHit",introId);
+		System.out.println("intro up hit: "+res);
+	}
 	@Override
 	public void introDelete(int introId) {
 		System.out.println("introDelete method");

@@ -19,4 +19,7 @@
 <delete id="introDelete">
 	DELETE FROM INTRODB WHERE INTROID=#{introId}
 </delete>
+<update id="introUpHit">
+	UPDATE INTRODB SET INTROHIT=INTROHIT+1 WHERE INTROID=#{introId}
+</update>
 </mapper>
