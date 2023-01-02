@@ -9,4 +9,5 @@ public interface IBoardDao {
 	public ArrayList<IntroDto> introList();
 	public IntroDto introDetails (int introID);
 	public void introDelete(int introId);
+	public IntroDto introModifyForm(int introId);
 }

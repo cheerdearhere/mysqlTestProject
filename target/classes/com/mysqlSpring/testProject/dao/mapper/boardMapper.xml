@@ -22,4 +22,8 @@
 <update id="introUpHit">
 	UPDATE INTRODB SET INTROHIT=INTROHIT+1 WHERE INTROID=#{introId}
 </update>
+<select id="introModifyForm" resultType="com.mysqlSpring.testProject.dto.IntroDto">
+	SELECT * FROM INTRODB WHERE INTROID=#{introId}
+</select>
+
 </mapper>

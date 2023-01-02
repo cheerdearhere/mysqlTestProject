@@ -11,7 +11,7 @@ public class IntroDeleteCommand implements ICommand {
 
 	@Override
 	public void execute(HttpServletRequest request, Model model) {
-		String introID = (String)request.getAttribute("introId");
+		String introID = (String)request.getParameter("introId");
 		System.out.println(introID+" delete command");
 		int introId = Integer.parseInt(introID);
 		

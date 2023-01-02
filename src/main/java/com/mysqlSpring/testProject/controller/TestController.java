@@ -26,6 +26,7 @@ import com.mysqlSpring.testProject.command.ICommand;
 import com.mysqlSpring.testProject.command.IntroDeleteCommand;
 import com.mysqlSpring.testProject.command.IntroDetailsCommand;
 import com.mysqlSpring.testProject.command.IntroListCommand;
+import com.mysqlSpring.testProject.command.IntroModyfyFormCommand;
 import com.mysqlSpring.testProject.command.IntroWriteCommand;
 import com.mysqlSpring.testProject.command.UserJoinCommand;
 import com.mysqlSpring.testProject.dao.BoardDao;
@@ -192,10 +193,10 @@ public class TestController {
 			catch(Exception e) {
 				e.printStackTrace();
 			}
-			return "redirect:intro";
+			return "redirect:main";
 		}
 		else {
-			return "redirect:intro";
+			return "redirect:main";
 		}
 	}
 	@RequestMapping("/introDetails")
@@ -213,9 +214,9 @@ public class TestController {
 		}
 	}
 	@RequestMapping("/introModifyForm")
-	public String introModify(HttpServletRequest request, Model model) {
+	public String introModifyForm(HttpServletRequest request, Model model) {
 		System.out.println("introModifyForm request");
-		com=new IntroDetailsCommand();//IntroModyfyFormCommand()
+		com=new IntroModyfyFormCommand();
 		com.execute(request, model);
 		return "introModifyView";
 	}
@@ -226,5 +227,9 @@ public class TestController {
 		com.execute(request, model);
 		return "intro";
 	}
-	
+	@RequestMapping("/introModify")
+	public String introModify(HttpServletRequest request, Model model) {
+		System.out.println("introModify request");
+		return "intro";
+	}
 }
