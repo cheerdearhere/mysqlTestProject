@@ -74,7 +74,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<button type="submit" class="btn btn-outline-dark btn-block">제출</button>
+		<button type="submit" class="btn btn-outline-success btn-block">제출</button>
 	</form>
 </div>
 <script>
