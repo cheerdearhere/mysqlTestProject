@@ -10,4 +10,5 @@ public interface IBoardDao {
 	public IntroDto introDetails (int introID);
 	public void introDelete(int introId);
 	public IntroDto introModifyForm(int introId);
+	public void introModify(IntroDto dto);
 }

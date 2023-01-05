@@ -56,7 +56,9 @@
 						<input type="text" name="introName" value="${introDetails.introName}"/>
 					</td>
 					<td class="introTab">조회수</td>
-					<td>${introDetails.introHit}</td>
+					<td>
+						<input type="text" name="introHit" value="${introDetails.introHit}" readonly="readonly"/>
+					</td>
 				</tr>
 				<tr>
 					<td class="introTab" colspan="2">제목</td>
@@ -69,11 +71,12 @@
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea rows="3">${introDetails.introContent}</textarea>
+						<textarea name="introContent" rows="3">${introDetails.introContent}</textarea>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<input type="hidden" name="introPhoto" value="${introDetails.introPhoto}"/>
 		<button type="submit" class="btn btn-outline-success btn-block">제출</button>
 	</form>
 </div>

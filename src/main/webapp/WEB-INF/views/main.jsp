@@ -68,8 +68,8 @@ html, body{
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="navigator">
-					<i class="fas fa-dog"></i>Relative
+				<a class="nav-link" href="navigator" id="navigator">
+					<i class="fas fa-dog"></i>navigator
 				</a>
 			</li>
 			<li class="nav-item">
@@ -194,6 +194,23 @@ $(document).ready(function(){
 				$("#mainRagion").html(data);
 				$("#skillTitle").text("Introduction Character");
 				$("#skillDetails").text("캐릭터에대한 설명을 저장하고 볼 수 있는 페이지 입니다."); 
+			},
+			error:function(){
+				$("#errorMessage").text("서버접속 실패");
+				$("#mbody").text("서버 오류");
+				$("#modal").trigger("click");
+			}
+		});
+	});
+	$("#navigator").click(function(event){
+		event.preventDefault();
+		$.ajax({
+			url:$("#navigator").attr("href"),
+			type:"get",
+			success:function(data){
+				$("#mainRagion").html(data);
+				$("#skillTitle").text("Navigator");
+				$("#skillDetails").text("사이트와 관련된 링크에 접근하는 페이지입니다."); 
 			},
 			error:function(){
 				$("#errorMessage").text("서버접속 실패");

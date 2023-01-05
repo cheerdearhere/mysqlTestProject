@@ -3,6 +3,7 @@ package com.mysqlSpring.testProject.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mysqlSpring.testProject.dto.IntroDto;
 import com.mysqlSpring.testProject.dto.UserJoinDto;
 
 public class UserDao implements IUserDao {
@@ -34,4 +35,6 @@ public class UserDao implements IUserDao {
 		UserJoinDto result = sqlSession.selectOne("login", pid);
 		return result;
 	}
+
+
 }

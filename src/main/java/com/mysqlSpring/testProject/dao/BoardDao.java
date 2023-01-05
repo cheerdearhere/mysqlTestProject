@@ -58,5 +58,12 @@ public class BoardDao implements IBoardDao {
 		return dto;
 	}
 
+	@Override
+	public void introModify(IntroDto dto) {
+		System.out.println("introModify method");
+		int res = sqlSession.update("introModify", dto);
+		System.out.println("introModify res: "+res);
+	}
+
 
 }

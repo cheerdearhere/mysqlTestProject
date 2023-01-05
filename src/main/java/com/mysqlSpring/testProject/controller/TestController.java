@@ -26,6 +26,7 @@ import com.mysqlSpring.testProject.command.ICommand;
 import com.mysqlSpring.testProject.command.IntroDeleteCommand;
 import com.mysqlSpring.testProject.command.IntroDetailsCommand;
 import com.mysqlSpring.testProject.command.IntroListCommand;
+import com.mysqlSpring.testProject.command.IntroModifyCommand;
 import com.mysqlSpring.testProject.command.IntroModyfyFormCommand;
 import com.mysqlSpring.testProject.command.IntroWriteCommand;
 import com.mysqlSpring.testProject.command.UserJoinCommand;
@@ -137,11 +138,9 @@ public class TestController {
 	@RequestMapping("/intro")
 	public String introView(HttpServletRequest request,Model model) {
 		System.out.println("intro request");
-		
 		//dto list call
 		com = new IntroListCommand();
 		com.execute(request, model);
-
 		return "intro";
 	}
 
@@ -225,11 +224,17 @@ public class TestController {
 		System.out.println("introDelete request");
 		com=new IntroDeleteCommand(); 
 		com.execute(request, model);
+		com = new IntroListCommand();
+		com.execute(request, model);
 		return "intro";
 	}
 	@RequestMapping("/introModify")
 	public String introModify(HttpServletRequest request, Model model) {
 		System.out.println("introModify request");
+		com=new IntroModifyCommand();
+		com.execute(request, model);
+		com = new IntroListCommand();
+		com.execute(request, model);
 		return "intro";
 	}
 }

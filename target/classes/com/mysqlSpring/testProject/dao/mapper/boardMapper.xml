@@ -25,5 +25,7 @@
 <select id="introModifyForm" resultType="com.mysqlSpring.testProject.dto.IntroDto">
 	SELECT * FROM INTRODB WHERE INTROID=#{introId}
 </select>
-
+<update id="introModify" parameterType="com.mysqlSpring.testProject.dto.IntroDto">
+	UPDATE INTRODB SET INTRONAME=#{introName},INTROTITLE=#{introTitle},INTROCONTENT=#{introContent} WHERE INTROID=#{introId}
+</update>
 </mapper>
