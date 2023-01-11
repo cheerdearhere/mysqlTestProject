@@ -16,7 +16,7 @@
 <select id="introDetails" resultType="com.mysqlSpring.testProject.dto.IntroDto">
 	SELECT * FROM INTRODB WHERE INTROID=#{introId}
 </select>
-<delete id="introDelete">
+<delete id="introDelete">›
 	DELETE FROM INTRODB WHERE INTROID=#{introId}
 </delete>
 <update id="introUpHit">
