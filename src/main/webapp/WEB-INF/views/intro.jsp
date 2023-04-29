@@ -48,6 +48,7 @@
 <div class="contatiner">
 	<h3 class="text-center text-info" style="margin-top: 90px;">List</h3>
 	<a id="introWriteView" class="btn btn-success" href="introWriteView">등록</a>
+	<a id="downloadBtn" class="btn btn-danger" href="downloadRequest">fileDownloadTest</a>
 	<hr/>	
 	<div class="row mb-3">
 		<c:forEach items="${allList}" var="dto">

@@ -1,7 +1,14 @@
 package com.mysqlSpring.testProject.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -237,4 +245,54 @@ public class TestController {
 		com.execute(request, model);
 		return "intro";
 	}
+	
+	//test
+	@RequestMapping("/downloadRequest")
+	public void downloadRequest(HttpServletRequest request,HttpServletResponse response) {
+		
+		//afterProject.txt
+		String fileName = "afterProject.txt";//request.getParameter("fileName")
+		//구별시킨파일이름: 
+		String realFileName = "0123456789012345678901234567890afterProject.txt";
+		//파일이 위치한 경로: 
+		String filePath = "/Users/choikmacbookair/Desktop/"+realFileName;
+		//String path = "F:\\uploadFile\\jarzip.PNG"; // 경로에 접근할 때 역슬래시('\') 사용
+		
+		File file = new File(filePath);	
+		int fileSize = (int) file.length();
+		
+		//response 설정
+		response.setContentType("application/octet-stream");
+		//파일명 지정
+		response.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\";");
+		//변경사항 인코
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		System.out.println(file.getName());
+		response.setContentLength(fileSize);
+		
+		//FileInputStream으로 읽어와 response로 반환
+		try {
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+			FileCopyUtils.copy(inputStream, response.getOutputStream());
+			response.flushBuffer();
+			inputStream.close();
+			
+			/*1024바이트씩 계속 읽으면서 outputStream에 저장, 
+                 -1이 나오면 더이상 읽을 파일이 없음
+			  int read = 0;
+              byte[] buffer = new byte[1024];
+              while ((read = fileInputStream.read(buffer)) != -1) { 
+              out.write(buffer, 0, read);
+              }
+			 */
+		} catch(IOException e) {
+			System.out.println("fileInputStream 에러: "+filePath);
+			e.printStackTrace();
+		}
+		
+		System.out.println(fileName+" 다운로드");
+	}
+	
+
+
 }
